@@ -32,6 +32,14 @@
 
    <br /> <br />
 
+   <label for="sortOrder">Sort:</label>
+   <select id="sortOrder" ng-model="settings.sort">
+      <option value="DESC">Newest First</option>
+      <option value="ASC">Oldest First</option>
+   </select>
+
+   <br /><br />
+
    <input type="submit" value="Search" ng-click="search()" style="font-size: 0.8em" />
 </article>
 

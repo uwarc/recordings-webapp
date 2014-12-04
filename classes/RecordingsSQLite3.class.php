@@ -101,7 +101,9 @@ class RecordingsSqlite3 implements Recordings
       }// End of if
 
       $sort = isset($filters['start']) ? "ASC" : "DESC";
-      $sql .= " AND id >= $start  ORDER BY timestamp $sort LIMIT 0, $max) tmp ORDER BY tmp.id ASC";
+      $res_sort = isset($filters['sort']) && strtoupper($filters['sort']) === 'DESC' ? 'DESC' : 'ASC';
+
+      $sql .= " AND id >= $start  ORDER BY timestamp $sort LIMIT 0, $max) tmp ORDER BY tmp.id $res_sort";
 
       $stmt = $this->db->prepare($sql);
 

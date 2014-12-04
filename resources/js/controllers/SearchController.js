@@ -30,6 +30,7 @@ angular
          $scope.settings = [];
          $scope.settings.favourite = "any";
          $scope.settings.minLength = 0.0;
+         $scope.settings.sort = "DESC";
 
          $scope.data = [];
          $scope.data.recordings = [];
@@ -42,6 +43,7 @@ angular
 
             settings.favourite = $scope.settings.favourite;
             settings.minLength = $scope.settings.minLength;
+            settings.sort = $scope.settings.sort;
             if ($scope.settings.startDate != "") settings.startDate = $scope.settings.startDate;
             if ($scope.settings.endDate != "") settings.endDate = $scope.settings.endDate;
 
