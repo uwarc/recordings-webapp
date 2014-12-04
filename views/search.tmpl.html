@@ -17,6 +17,14 @@
    <label for="minLength">Minimum Length (seconds):</label>
    <input type="number" min="0.0" step="0.1" id="minLength" ng-model="settings.minLength" />
 
+   <br /> <br />
+
+   <label for="sortOrder">Sort:</label>
+   <select id="sortOrder" ng-model="settings.sort">
+      <option value="DESC">Newest First</option>
+      <option value="ASC">Oldest First</option>
+   </select>
+
    <p style="font-size: 0.9em; color: #666">To filter by date/time, a start and end time must be provided.
       <br />Unless filtering by date/time, limited results are returned. For a full set of results, add a start and end date/time.</p>
 
@@ -29,14 +37,6 @@
       <label for="endDate">End Date/Time:</label>
       <div date-picker="settings.endDate"></div>
    </div>
-
-   <br /> <br />
-
-   <label for="sortOrder">Sort:</label>
-   <select id="sortOrder" ng-model="settings.sort">
-      <option value="DESC">Newest First</option>
-      <option value="ASC">Oldest First</option>
-   </select>
 
    <br /><br />
 
