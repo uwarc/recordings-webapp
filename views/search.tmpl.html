@@ -1,0 +1,39 @@
+<h1>Search</h1>
+
+<article class="search" style="border-bottom: 1px solid #eee; padding-bottom: 15px;">
+   <header>
+      <h1>Search Settings</h1>
+   </header>
+
+   <label for="isFavourite">Favourite:</label>
+   <select id="isFavourite" ng-model="settings.favourite">
+      <option value="any">Any</option>
+      <option value="yes">Favourite</option>
+      <option value="no">Not Favourite</option>
+   </select>
+
+   <br /> <br />
+
+   <label for="minLength">Minimum Length (seconds):</label>
+   <input type="number" min="0.0" step="0.1" id="minLength" ng-model="settings.minLength" />
+
+   <p style="font-size: 0.9em; color: #666">To filter by date/time, a start and end time must be provided.
+      <br />Unless filtering by date/time, limited results are returned. For a full set of results, add a start and end date/time.</p>
+
+   <div style="display: inline-block">
+      <label for="startDate">Start Date/Time:</label>
+      <div date-picker="settings.startDate"></div>
+   </div>
+
+   <div style="display: inline-block">
+      <label for="endDate">End Date/Time:</label>
+      <div date-picker="settings.endDate"></div>
+   </div>
+
+   <br /> <br />
+
+   <input type="submit" value="Search" ng-click="search()" style="font-size: 0.8em" />
+</article>
+
+<h2>Search Results</h2>
+<ng:include src="'./partials/recordings.tmpl.html'" />

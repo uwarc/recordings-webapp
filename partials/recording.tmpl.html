@@ -1,0 +1,12 @@
+<article class="recording">
+   <div class="container">
+      <a ng-click="toggleFavourite(recording)" class="favourite" ng-class="{ isFavourite: recording.favourite}">&nbsp;</a>
+      <a ng-click="toggleShowComment(recording)" class="comment" ng-class="{ hasComment: recording.comment, showComment: recording.showComment}">&nbsp;</a>
+
+      <wavesurfer class="recording-waveform" href="recording/{{recording.filename}}" title="{{recording.date | date:'h:mm:ssa'}} - {{recording.date | date:longDate}}" artist="{{(recording.rid != -1) ? recording.rid : 'Unknown'}} - {{(recording.tgid != -1) ? recording.tgid : 'Unknown'}}" autoplay="recording.autoplay" finished="finishedPlayingRecording(recording)"></wavesurfer>
+   </div>
+
+   <div class="comment-wrapper" ng-show="recording.showComment">
+      <textarea class="comment" ng-blur="setComment(recording)" ng-model="recording.comment"></textarea>
+   </div>
+</article>

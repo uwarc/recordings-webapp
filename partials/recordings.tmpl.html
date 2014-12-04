@@ -1,0 +1,5 @@
+<section class="recordings" ng-controller="RecordingsController">
+   <ng:include src="'./partials/recording.tmpl.html'" dir-paginate="recording in data.recordings | orderBy:'timestamp':true | itemsPerPage: 20" />
+
+   <dir-pagination-controls template-url='./bower_components/angular-utils-pagination/dirPagination.tpl.html'></dir-pagination-controls>
+</section>

@@ -1,0 +1,82 @@
+<!doctype>
+<!--
+The MIT License (MIT)
+
+Copyright (c) 2014 University of Waterloo Amateur Radio Club
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+<html lang="en" ng-app="DSDRecordings">
+   <head>
+      <base href="/recordings/" />
+      <meta charset="utf-8" />
+
+      <title>DSD Recordings</title>
+
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600" />
+      <link rel="stylesheet" href="./bower_components/font-awesome/css/font-awesome.css" />
+      <link rel="stylesheet" href="./resources/css/wavesurfer-js-angular.css" />
+      <link rel="stylesheet" href="./bower_components/angular-datepicker/dist/index.min.css" />
+      <link rel="stylesheet" href="./resources/css/dsd-recordings.css" />
+   </head>
+   <body>
+      <div id="header-wrapper">
+         <header>
+            <h1>DSD Recordings</h1>
+         </header>
+      </div><!-- End of header-wrapper -->
+
+      <div id="navigation-wrapper">
+         <nav>
+            <ul>
+               <li><a href=".">Home</a></li>
+               <li><a href="./search">Search</a></li>
+            </ul>
+         </nav>
+      </div><!-- End of navigation-wrapper -->
+
+      <div id="content-wrapper">
+         <section class="notices">
+            <ng:include src="'./partials/rca-notice.tmpl.html'" />
+         </section>
+
+         <ng-view />
+      </div><!-- End of content-wrapper -->
+
+      <div id="footer-wrapper">
+         <footer>
+            <p>Copyright &copy; 2014 &ndash; <a href="http://uwarc.uwaterloo.ca/">University of Waterloo Amateur Radio Club</a></p>
+         </footer>
+      </div><!-- End of footer-wrapper -->
+
+      <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+      <script src="./bower_components/angular/angular.min.js"></script>
+      <script src="./bower_components/angular-route/angular-route.min.js"></script>
+      <script src="./bower_components/angular-resource/angular-resource.min.js"></script>
+      <script src="./bower_components/angular-datepicker/dist/index.min.js"></script>
+      <script src="./bower_components/wavesurfer.js/build/wavesurfer.min.js"></script>
+      <script src="./resources/js/directives/wavesurfer-js-angular.js"></script>
+      <script src="./bower_components/angular-utils-pagination/dirPagination.js"></script>
+      <script src="./resources/js/DSDRecordings.js"></script>
+      <script src="./resources/js/factories/recordings-api.js"></script>
+      <script src="./resources/js/controllers/RecordingsController.js"></script>
+      <script src="./resources/js/controllers/LiveController.js"></script>
+      <script src="./resources/js/controllers/SearchController.js"></script>
+   </body>
+</html>
