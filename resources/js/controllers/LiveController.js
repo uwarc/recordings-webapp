@@ -35,28 +35,28 @@ angular
 
       RecordingsAPI.recordings().get({ max: $scope.max }, function(data) {
          $scope.data = data;
-         $scope.autoplayIndex = $scope.data.recordings.length;
+         $scope.autoplayIndex = -1;
 
          $scope.newRecordingsInterval = $interval(function() {
             RecordingsAPI.recordings().get({ start: $scope.data.end + 1, max: $scope.max }, function(data) {
                if (data.recordings.length == 0) return;
 
-               var oldLength = $scope.data.recordings.length;
                $scope.data.end = data.end;
 
                for (var x in data.recordings) {
-                  $scope.data.recordings.push(data.recordings[x]);
+                  $scope.data.recordings.unshift(data.recordings[x]);
                }// End of for
+
+               $scope.autoplayIndex += data.recordings.length;
 
                if ($scope.autoplay) {
                   $timeout(function() {
-                     if (oldLength == $scope.autoplayIndex) {
+                     if ($scope.autoplayIndex - data.recordings.length == -1) {
                         $scope.data.recordings[$scope.autoplayIndex].autoplay = true;
                      }
                   }, 1000);
-               } else {
-                  $scope.autoplayIndex = $scope.data.recordings.length;
-               }// End of if/else
+               }// End of if
+
             });
          }, 5000);
       });
@@ -64,9 +64,9 @@ angular
       $scope.finishedPlayingRecording = function(recording) {
          if ($scope.autoplay && $scope.data.recordings.indexOf(recording) == $scope.autoplayIndex) {
             recording.autoplay = false;
-            $scope.autoplayIndex += 1;
+            $scope.autoplayIndex -= 1;
 
-            if ($scope.autoplayIndex < $scope.data.recordings.length) {
+            if ($scope.autoplayIndex >= 0) {
                $timeout(function() {
                   $scope.data.recordings[$scope.autoplayIndex].autoplay = true;
                }, 1000);
