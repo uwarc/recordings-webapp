@@ -31,7 +31,7 @@ angular
       $scope.data.recordings = [];
       $scope.autoplayIndex = 0;
       $scope.autoplay = true;
-      $scope.max = 50;
+      $scope.max = 10;
 
       RecordingsAPI.recordings().get({ max: $scope.max }, function(data) {
          $scope.data = data;

@@ -120,6 +120,12 @@ angular
                }// End of if
             });
 
+            $scope.$on('$destroy', function() {
+               if (!(wavesurfer in $scope)) return;
+               $scope.wavesurfer.empty();
+               $scope.wavesurfer.destroy();
+            });
+
             // Load
             $scope.wavesurfer.init($scope.config);
             $scope.wavesurfer.empty();
