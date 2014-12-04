@@ -33,17 +33,18 @@ angular
       $scope.autoplay = true;
       $scope.max = 10;
 
-      RecordingsAPI.recordings().get({ max: $scope.max }, function(data) {
+      RecordingsAPI.recordings().get({ max: $scope.max, sort: 'DESC' }, function(data) {
          $scope.data = data;
          $scope.autoplayIndex = -1;
 
          $scope.newRecordingsInterval = $interval(function() {
-            RecordingsAPI.recordings().get({ start: $scope.data.end + 1, max: $scope.max }, function(data) {
+            RecordingsAPI.recordings().get({ start: $scope.data.end + 1, max: $scope.max, sort: 'ASC' }, function(data) {
                if (data.recordings.length == 0) return;
 
                $scope.data.end = data.end;
 
                for (var x in data.recordings) {
+                  $scope.data.recordings.pop();
                   $scope.data.recordings.unshift(data.recordings[x]);
                }// End of for
 
@@ -58,7 +59,7 @@ angular
                }// End of if
 
             });
-         }, 5000);
+         }, 15000);
       });
 
       $scope.finishedPlayingRecording = function(recording) {
