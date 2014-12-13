@@ -129,6 +129,8 @@ class RecordingsSqlite3 implements Recordings
    public function addRecording($filename)
    {
       $str_date = preg_replace('/.*(\d{4})-(\d{2})-(\d{2})-(\d{2}):?(\d{2}):?(\d{2}).*/', '$1-$2-$3 $4:$5:$6', $filename);
+      $str_tgid = preg_replace('/.*tg(\d+).*/', '$1', $filename);
+      $str_rid = preg_replace('/.*src(\d+).*/', '$1', $filename);
 
       // Get the time of the recording
       // https://www.simonholywell.com/post/2013/12/convert-utc-to-local-time.html
@@ -150,8 +152,10 @@ class RecordingsSqlite3 implements Recordings
       $stmt->bindValue(':filename', $filename);
       $stmt->bindValue(':timestamp', $utcDate->getTimestamp());
       $stmt->bindValue(':length', $length);
-      $stmt->bindValue(':rid', -1);
-      $stmt->bindValue(':tgid', -1);
+      //$stmt->bindValue(':rid', -1);
+      //$stmt->bindValue(':tgid', -1);
+      $stmt->bindValue(':rid', (int)$str_rid);
+      $stmt->bindValue(':tgid', (int)$str_tgid);
 
       return $stmt->execute() !== FALSE;
    }// End of addRecording method

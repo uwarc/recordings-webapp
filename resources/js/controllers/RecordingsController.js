@@ -45,4 +45,12 @@ angular
       $scope.setComment = function(recording) {
          RecordingsAPI.setRecordingComment().get({filename: recording.filename, comment: recording.comment});
       }; // End of setComment method
+
+      $scope.validRadioId = function(radioId) {
+         return radioId != -1 && radioId != 0;
+      }
+
+      $scope.validTalkgroupId = function(talkgroupId) {
+         return talkgroupId != -1 && talkgroupId != 0;
+      }
     }]);
