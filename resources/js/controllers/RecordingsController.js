@@ -27,6 +27,18 @@ SOFTWARE.
 angular
    .module('DSDRecordings')
    .controller('RecordingsController', ['$scope', 'RecordingsAPI', function($scope, RecordingsAPI) {
+      $scope.radioIds = [];
+      $scope.talkgroupIds = [];
+
+      // Load information
+      RecordingsAPI.talkgroups().get(function(talkgroups) {
+         $scope.talkgroupIds = talkgroups;
+      });
+
+      RecordingsAPI.radios().get(function(radios) {
+         $scope.radioIds = radios;
+      });
+
       // Functions
       $scope.toggleFavourite = function(recording) {
          if (!recording.favourite) {
@@ -46,11 +58,27 @@ angular
          RecordingsAPI.setRecordingComment().get({filename: recording.filename, comment: recording.comment});
       }; // End of setComment method
 
-      $scope.validRadioId = function(radioId) {
-         return radioId != -1 && radioId != 0;
-      }
+      $scope.prettifyTalkgroupId = function(talkgroupId) {
+         talkgroupId = parseInt(talkgroupId);
 
-      $scope.validTalkgroupId = function(talkgroupId) {
-         return talkgroupId != -1 && talkgroupId != 0;
-      }
+         if (talkgroupId <= 0) {
+            return 'Unknown'
+         } else if ($.inArray(talkgroupId, $scope.talkgroupIds)) {
+            return $scope.talkgroupIds[talkgroupId];
+         } else {
+            return talkgroupId;
+         }// End of if/else if/else
+      }; // End of prettifyTalkgroupId method
+
+      $scope.prettifyRadioId = function(radioId) {
+         radioId = parseInt(radioId);
+
+         if (radioId <= 0) {
+            return 'Unknown'
+         } else if ($.inArray(radioId, $scope.radioIds)) {
+            return $scope.radioIds[radioId];
+         } else {
+            return radioId;
+         }// End of if/else if/else
+      }; // End of prettifyRadioId method
     }]);

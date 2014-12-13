@@ -30,7 +30,7 @@ require_once('config.php');
 $recordings = new RecordingsSQLite3();
 
 if (!isset($argv[0])) die('Sorry, you are not permitted to execute this file.' . PHP_EOL);
-if (!isset($argv[1])) die('Usage: php ctrl.php (add-recording|add-all-recordings|clear)' . PHP_EOL);
+if (!isset($argv[1])) die('Usage: php ctrl.php (add-recording|add-all-recordings|clear|add-talkgroup|add-radio)' . PHP_EOL);
 
 switch($argv[1])
 {
@@ -101,5 +101,21 @@ switch($argv[1])
       {
          unlink(SQLITE_DATABASE);
       }// End of if
+      break;
+
+   case 'add-talkgroup':
+      if (!isset($argv[2])) die('Please specify talkgroup ID.' . PHP_EOL);
+      if (!isset($argv[3])) die('Please specify talkgroup name.' . PHP_EOL);
+
+      $recordings->addTalkgroup($argv[2], $argv[3]);
+
+      break;
+
+   case 'add-radio':
+      if (!isset($argv[2])) die('Please specify radio ID.' . PHP_EOL);
+      if (!isset($argv[3])) die('Please specify radio name.' . PHP_EOL);
+
+      $recordings->addRadio($argv[2], $argv[3]);
+
       break;
 }// End of switch

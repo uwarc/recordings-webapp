@@ -76,6 +76,14 @@ switch($request[0])
          case 'comment':
             $recordings->setRecordingComment($params['filename'], isset($params['comment']) ? $params['comment'] : '');
             break;
+
+         case 'talkgroups':
+            echo json_encode($recordings->getTalkgroups());
+            break;
+
+         case 'radios':
+            echo json_encode($recordings->getRadios());
+            break;
       }// End of switch
 
       break;

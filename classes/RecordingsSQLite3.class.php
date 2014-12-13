@@ -50,6 +50,16 @@ class RecordingsSqlite3 implements Recordings
                            favourite BOOLEAN NOT NULL CHECK (favourite IN (0,1)),
                            comment TEXT
                         );
+                        CREATE TABLE IF NOT EXISTS talkgroups
+                        (
+                           id INTEGER PRIMARY KEY,
+                           name CHAR(50)
+                        );
+                        CREATE TABLE IF NOT EXISTS radios
+                        (
+                           id INTEGER PRIMARY KEY,
+                           name CHAR(50)
+                        );
                         COMMIT;");
    }// End of constructor method
 
@@ -57,6 +67,60 @@ class RecordingsSqlite3 implements Recordings
    {
       $this->db->close();
    }// End of destructor method
+
+   // Returns the mapping of talkgroup IDs to names.
+   public function getTalkgroups()
+   {
+      $talkgroups = Array();
+      $stmt = $this->db->prepare("SELECT * FROM talkgroups");
+      $res = $stmt->execute();
+
+      if ($res === NULL) return Array();
+
+      while ($row = $res->fetchArray(SQLITE3_ASSOC))
+      {
+         $talkgroups[$row['id']] = $row['name'];
+      }// End of while
+
+      return $talkgroups;
+   }// End of getTalkgroups method
+
+   // Add a new talkgroup
+   public function addTalkgroup($talkgroupId, $talkgroupName)
+   {
+      $stmt = $this->db->prepare("INSERT INTO talkgroups (id, name) VALUES (:id, :name)");
+      $stmt->bindValue(':id', (int)$talkgroupId);
+      $stmt->bindValue(':name', $talkgroupName);
+
+      return $stmt->execute() !== FALSE;
+   }// End of addTalkgroup method
+
+   // Returns the mapping of radio IDs to names.
+   public function getRadios()
+   {
+      $radios = Array();
+      $stmt = $this->db->prepare("SELECT * FROM radios");
+      $res = $stmt->execute();
+
+      if ($res === NULL) return Array();
+
+      while ($row = $res->fetchArray(SQLITE3_ASSOC))
+      {
+         $radios[$row['id']] = $row['name'];
+      }// End of while
+
+      return $radios;
+   }// End of getRadios method
+
+   // Add a new talkgroup
+   public function addRadio($radioId, $radioName)
+   {
+      $stmt = $this->db->prepare("INSERT INTO radios (id, name) VALUES (:id, :name)");
+      $stmt->bindValue(':id', (int)$radioId);
+      $stmt->bindValue(':name', $radioName);
+
+      return $stmt->execute() !== FALSE;
+   }// End of addRadio method
 
    // Return existing recordings
    public function getRecordings($filters = Array())

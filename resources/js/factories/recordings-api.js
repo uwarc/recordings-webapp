@@ -43,6 +43,14 @@ angular
 
          setRecordingComment: function() {
             return $resource('api/comment', { comment: '' }, { get: { method: 'GET', cache: false }});
+         },
+
+         talkgroups: function() {
+            return $resource('api/talkgroups', {}, { get: { method: 'GET', cache: false }});
+         },
+
+         radios: function() {
+            return $resource('api/radios', {}, { get: { method: 'GET', cache: false }});
          }
        };
     }]);
