@@ -216,8 +216,6 @@ class RecordingsSqlite3 implements Recordings
       $stmt->bindValue(':filename', $filename);
       $stmt->bindValue(':timestamp', $utcDate->getTimestamp());
       $stmt->bindValue(':length', $length);
-      //$stmt->bindValue(':rid', -1);
-      //$stmt->bindValue(':tgid', -1);
       $stmt->bindValue(':rid', (int)$str_rid);
       $stmt->bindValue(':tgid', (int)$str_tgid);
 
