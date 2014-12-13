@@ -78,11 +78,11 @@ switch($request[0])
             break;
 
          case 'talkgroups':
-            echo json_encode($recordings->getTalkgroups());
+            echo json_encode($recordings->getTalkgroups(), JSON_FORCE_OBJECT);
             break;
 
          case 'radios':
-            echo json_encode($recordings->getRadios());
+            echo json_encode($recordings->getRadios(), JSON_FORCE_OBJECT);
             break;
       }// End of switch
 

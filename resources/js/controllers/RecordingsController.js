@@ -32,11 +32,15 @@ angular
 
       // Load information
       RecordingsAPI.talkgroups().get(function(talkgroups) {
-         $scope.talkgroupIds = talkgroups;
+         talkgroups.$promise.then(function(data) {
+            $scope.talkgroupIds = data;
+         });
       });
 
       RecordingsAPI.radios().get(function(radios) {
-         $scope.radioIds = radios;
+         radios.$promise.then(function(data) {
+            $scope.radioIds = data;
+         });
       });
 
       // Functions
@@ -63,7 +67,7 @@ angular
 
          if (talkgroupId <= 0) {
             return 'Unknown'
-         } else if ($.inArray(talkgroupId, $scope.talkgroupIds)) {
+         } else if (talkgroupId in $scope.talkgroupIds) {
             return $scope.talkgroupIds[talkgroupId];
          } else {
             return talkgroupId;
@@ -75,7 +79,7 @@ angular
 
          if (radioId <= 0) {
             return 'Unknown'
-         } else if ($.inArray(radioId, $scope.radioIds)) {
+         } else if (radioId in $scope.radioIds) {
             return $scope.radioIds[radioId];
          } else {
             return radioId;
