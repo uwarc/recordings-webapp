@@ -164,6 +164,16 @@ class RecordingsSqlite3 implements Recordings
          $max = PHP_INT_MAX;
       }// End of if
 
+      if (isset($filters['talkgroup']))
+      {
+         $sql .= " AND tgid = " . ((int)$filters['talkgroup']) . " ";
+      }// End of if
+
+      if (isset($filters['radio']))
+      {
+         $sql .= " AND rid = " . ((int)$filters['radio']) . " ";
+      }// End of if
+
       $sort = isset($filters['start']) ? "ASC" : "DESC";
       $res_sort = isset($filters['sort']) && strtoupper($filters['sort']) === 'DESC' ? 'DESC' : 'ASC';
 

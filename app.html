@@ -34,6 +34,7 @@ SOFTWARE.
       <link rel="stylesheet" href="./resources/css/wavesurfer-js-angular.css" />
       <link rel="stylesheet" href="./bower_components/angular-datepicker/dist/index.min.css" />
       <link rel="stylesheet" href="./resources/css/dsd-recordings.css" />
+      <link rel="stylesheet" href="./resources/css/datalist.css" />
    </head>
    <body>
       <div id="header-wrapper">
@@ -65,6 +66,7 @@ SOFTWARE.
          </footer>
       </div><!-- End of footer-wrapper -->
 
+      <script src="./bower_components/modernizr-load/modernizr.js"></script>
       <script src="./bower_components/jquery/dist/jquery.min.js"></script>
       <script src="./bower_components/angular/angular.min.js"></script>
       <script src="./bower_components/angular-route/angular-route.min.js"></script>
@@ -78,5 +80,11 @@ SOFTWARE.
       <script src="./resources/js/controllers/RecordingsController.js"></script>
       <script src="./resources/js/controllers/LiveController.js"></script>
       <script src="./resources/js/controllers/SearchController.js"></script>
+      <script>
+         Modernizr.load({
+            test : (!Modernizr.input.list || (parseInt($.browser.version) > 400)),
+            yep : './resources/js/datalist.js'
+         });
+      </script>
    </body>
 </html>

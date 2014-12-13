@@ -1,0 +1,46 @@
+/* https://github.com/CSS-Tricks/Relevant-Dropdowns */
+/* http://css-tricks.com/license/ */
+
+.datalist {
+	list-style: none;
+	display: none;
+	background: white;
+	box-shadow: 0 2px 2px #999;
+	position: absolute;
+	left: 0;
+	top: 0;
+	max-height: 300px;
+	overflow-y: auto;
+   margin: 0;
+   padding: 0;
+   font: sans-serif;
+}
+.datalist:empty {
+	display: none !important;
+}
+.datalist li {
+	padding: 3px;
+	font: inherit;
+   margin: 0;
+   padding: 5px;
+   font-size: 0.9em;
+}
+.datalist li .value {
+   color: black;
+}
+.datalist li .description {
+   float: right;
+   text-align: right;
+   margin-left: 10px;
+   font-size: 0.9em;
+   color: #777;
+}
+.datalist li.active {
+	background: #3875d7;
+}
+.datalist li.active .value {
+   color: white;
+}
+.datalist li.active .description {
+   color: #ccc;
+}

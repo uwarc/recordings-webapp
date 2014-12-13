@@ -27,6 +27,22 @@ SOFTWARE.
 angular
     .module('DSDRecordings')
     .controller('SearchController', ['$scope', 'RecordingsAPI', function($scope, RecordingsAPI) {
+         $scope.radioIds = [];
+         $scope.talkgroupIds = [];
+
+         // Load information
+         RecordingsAPI.talkgroups().get(function(talkgroups) {
+            talkgroups.$promise.then(function(data) {
+               $scope.talkgroupIds = data;
+            });
+         });
+
+         RecordingsAPI.radios().get(function(radios) {
+            radios.$promise.then(function(data) {
+               $scope.radioIds = data;
+            });
+         });
+
          $scope.settings = [];
          $scope.settings.favourite = "any";
          $scope.settings.minLength = 0.0;
@@ -46,6 +62,8 @@ angular
             settings.sort = $scope.settings.sort;
             if ($scope.settings.startDate != "") settings.startDate = $scope.settings.startDate;
             if ($scope.settings.endDate != "") settings.endDate = $scope.settings.endDate;
+            if ($scope.settings.talkgroup != "") settings.talkgroup = $scope.settings.talkgroup;
+            if ($scope.settings.radio != "") settings.radio = $scope.settings.radio;
 
             RecordingsAPI.recordings().get(settings, function(data) {
                $scope.data = data;
