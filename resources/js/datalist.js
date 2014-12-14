@@ -194,6 +194,4 @@
 
     });
   };
-
-   $('input[list]').relevantDropdown();
 })(jQuery);

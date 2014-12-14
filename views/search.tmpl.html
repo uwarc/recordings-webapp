@@ -5,19 +5,13 @@
       <h1>Search Settings</h1>
    </header>
 
-   <label for="talkgroup">Talkgroup:</label> <input type="number" list="talkgroups" id="talkgroup" ng-model="settings.talkgroup">
-      <datalist id="talkgroups">
-          <option value="{{talkgroupId}}" ng-repeat="(talkgroupId, talkgroupName) in talkgroupIds">{{talkgroupName}}</option>
-      </datalist>
-   </input>
+   <label for="talkgroup">Talkgroup:</label>
+   <combobox type="number" options="talkgroupIds" ng-model="settings.talkgroup" />
 
    <br /></br />
 
-   <label for="radio">Radio:</label> <input type="number" list="radios" id="radio" ng-model="settings.radio">
-      <datalist id="radios">
-          <option value="{{radioId}}" ng-repeat="(radioId, radioName) in radioIds">{{radioName}}</option>
-      </datalist>
-   </input>
+   <label for="radio">Radio:</label>
+   <combobox type="number" options="radioIds" ng-model="settings.radio" />
 
    <br /></br />
 

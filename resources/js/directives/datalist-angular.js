@@ -25,26 +25,28 @@ SOFTWARE.
 'use strict';
 
 angular
-   .module('DSDRecordings',
-           ['ngRoute',
-            'ngResource',
-            'waversurfer-js.angular',
-            'combobox.angular',
-            'angularUtils.directives.dirPagination',
-            'datePicker'])
-   .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-      $routeProvider
-         .when('/', {
-            templateUrl: './views/live.tmpl.html',
-            controller: 'LiveController'
-         })
-         .when('/search', {
-            templateUrl: './views/search.tmpl.html',
-            controller: 'SearchController'
-         })
-         .otherwise({
-            templateUrl: './views/not-found.tmpl.html'
-         });
+   .module('combobox.angular', [])
+   .directive('combobox', ['$timeout', '$interval', function ($timeout, $interval) {
+      return {
+         restrict: 'AE',
+         scope: {
+            bindModel : '=ngModel',
+            type: '@',
+            options: '=?'
+         },
+         template: '<input type="{{type}}" list="{{datalistId}}">' +
+                     '<datalist id="{{datalistId}}">' +
+                        '<option value="{{key}}" ng-repeat="(key, value) in options">{{value}}</option>' +
+                     '</datalist>' +
+                   '</input>',
+         link: function($scope, $element) {
+            $scope.datalistId = 'dl' + Math.floor(Math.random() * 100);
 
-         $locationProvider.html5Mode(true);
+            if (!Modernizr.input.list || (parseInt($.browser.version) > 400)) {
+               $timeout(function() {
+                  $element.find('input').relevantDropdown();
+               }, 1000);
+            }// End of if
+         }
+      }
    }]);

@@ -73,18 +73,14 @@ SOFTWARE.
       <script src="./bower_components/angular-resource/angular-resource.min.js"></script>
       <script src="./bower_components/angular-datepicker/dist/index.min.js"></script>
       <script src="./bower_components/wavesurfer.js/build/wavesurfer.min.js"></script>
+      <script src="./resources/js/datalist.js"></script>
       <script src="./resources/js/directives/wavesurfer-js-angular.js"></script>
+      <script src="./resources/js/directives/datalist-angular.js"></script>
       <script src="./bower_components/angular-utils-pagination/dirPagination.js"></script>
       <script src="./resources/js/DSDRecordings.js"></script>
       <script src="./resources/js/factories/recordings-api.js"></script>
       <script src="./resources/js/controllers/RecordingsController.js"></script>
       <script src="./resources/js/controllers/LiveController.js"></script>
       <script src="./resources/js/controllers/SearchController.js"></script>
-      <script>
-         Modernizr.load({
-            test : (!Modernizr.input.list || (parseInt($.browser.version) > 400)),
-            yep : './resources/js/datalist.js'
-         });
-      </script>
    </body>
 </html>
