@@ -45,7 +45,7 @@ angular
             if (!Modernizr.input.list || (parseInt($.browser.version) > 400)) {
                $timeout(function() {
                   $element.find('input').relevantDropdown();
-               }, 1000);
+               }, 100);
             }// End of if
          }
       }
