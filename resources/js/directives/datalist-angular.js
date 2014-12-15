@@ -34,7 +34,7 @@ angular
             type: '@',
             options: '=?'
          },
-         template: '<input type="{{type}}" list="{{datalistId}}">' +
+         template: '<input type="{{type}}" list="{{datalistId}}" ng-model="bindModel">' +
                      '<datalist id="{{datalistId}}">' +
                         '<option value="{{key}}" ng-repeat="(key, value) in options">{{value}}</option>' +
                      '</datalist>' +
