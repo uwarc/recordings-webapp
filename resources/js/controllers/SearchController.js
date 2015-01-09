@@ -47,6 +47,8 @@ angular
          $scope.settings.favourite = "any";
          $scope.settings.minLength = 0.0;
          $scope.settings.sort = "DESC";
+         $scope.settings.talkgroups = [];
+         $scope.settings.radios = [];
 
          $scope.data = [];
          $scope.data.recordings = [];
@@ -62,8 +64,8 @@ angular
             settings.sort = $scope.settings.sort;
             if ($scope.settings.startDate != "") settings.startDate = $scope.settings.startDate;
             if ($scope.settings.endDate != "") settings.endDate = $scope.settings.endDate;
-            if ($scope.settings.talkgroup != "") settings.talkgroup = $scope.settings.talkgroup;
-            if ($scope.settings.radio != "") settings.radio = $scope.settings.radio;
+            if ($scope.settings.talkgroups.length > 0) settings.talkgroups = $scope.settings.talkgroups.join(',');
+            if ($scope.settings.radios.length > 0) settings.radios = $scope.settings.radios.join(',');
 
             RecordingsAPI.recordings().get(settings, function(data) {
                $scope.data = data;

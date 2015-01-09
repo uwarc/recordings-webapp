@@ -1,11 +1,135 @@
 <h1>Search</h1>
 
+<style>
+.search {
+   overflow: hidden;
+}
+
+.results {
+   clear: both;
+   padding-top: 20px;
+}
+
+.search-config {
+   border: 1px solid #e4e4e4;
+   padding: 8px;
+   border-radius: 4px;
+   margin-top: 15px;
+}
+
+.search-config > header h2 {
+   background: #e4e4e4;
+   padding: 8px;
+   margin: -8px;
+   margin-bottom: 8px;
+}
+
+.grid-2 {
+   float: left;
+   width: 460px;
+   margin-right: 10px;
+   box-sizing: border-box;
+}
+
+.grid-2:nth-child(3n+1) {
+   margin-right: 0px;
+}
+
+.grid-3 {
+   float: left;
+   width: 304px;
+   margin-right: 10px;
+   box-sizing: border-box;
+}
+
+.grid-3:nth-child(3n+1) {
+   margin-right: 0px;
+}
+
+.grid-2 select, .grid-3 select {
+   width: 100%;
+}
+
+</style>
+
 <article class="search" style="border-bottom: 1px solid #eee; padding-bottom: 15px;">
    <header>
       <h1>Search Settings</h1>
    </header>
 
-   <label for="talkgroup">Talkgroup:</label>
+   <section class="search-config grid-3">
+      <header>
+         <h2>Talkgroup Filtering</h2>
+      </header>
+
+      <select multiple size="7" ng-model="settings.talkgroups">
+         <option value="{{key}}" ng-repeat="(key, value) in talkgroupIds">
+            {{key}} &mdash; {{value}}
+         </option>
+      </select>
+   </section>
+
+   <section class="search-config grid-3">
+      <header>
+         <h2>Radio Filtering</h2>
+      </header>
+
+      <select multiple size="7" ng-model="settings.radios">
+         <option value="{{key}}" ng-repeat="(key, value) in radioIds">
+            {{key}} &mdash; {{value}}
+         </option>
+      </select>
+   </section>
+
+   <section class="search-config grid-3">
+      <header>
+         <h2>Other Filtering</h2>
+      </header>
+
+      <input type="radio" value="any" id="favourite-any" name="favourite" checked ng-model="settings.favourite">
+      <label for="favourite-any">Any</label>
+
+      <input type="radio" value="yes" id="favourite-yes" name="favourite" checked ng-model="settings.favourite">
+      <label for="favourite-yes">Favourite</label>
+
+      <input type="radio" value="no" id="favourite-no" name="favourite" checked ng-model="settings.favourite">
+      <label for="favourite-no">Not Favourite</label>
+
+      <br><br>
+
+      <label for="minLength">Minimum Recording Length:</label>
+      <input type="number" min="0.0" step="0.1" id="minLength" ng-model="settings.minLength" style="width: 50px;" />
+
+      <br><br>
+
+      <input type="radio" value="DESC" id="sort-desc" name="sort" checked ng-model="settings.sort">
+      <label for="sort-desc">Newest First</label>
+
+      <input type="radio" value="ASC" id="sort-asc" name="sort" checked ng-model="settings.sort">
+      <label for="sort-asc">Oldest First</label>
+   </section>
+
+   <section class="search-config grid-3">
+      <header>
+         <h2>Start Date</h2>
+      </header>
+
+      <div date-picker="settings.startDate"></div>
+   </section>
+
+   <section class="search-config grid-3">
+      <header>
+         <h2>End Date</h2>
+      </header>
+
+      <div date-picker="settings.endDate"></div>
+   </section>
+
+   <section style="clear: both; padding-top: 10px;">
+      <input type="submit" value="Search" ng-click="search()" style="font-size: 0.8em">
+   </section>
+
+<!--   <label for="talkgroup">Talkgroup:</label>
    <combobox type="number" options="talkgroupIds" ng-model="settings.talkgroup" />
 
    <br /></br />
@@ -52,6 +176,9 @@
 
    <input type="submit" value="Search" ng-click="search()" style="font-size: 0.8em" />
 </article>
+-->
 
-<h2>Search Results</h2>
-<ng:include src="'./partials/recordings.tmpl.html'" />
+<section class="results">
+   <h2>Search Results</h2>
+   <ng:include src="'./partials/recordings.tmpl.html'" />
+</section>

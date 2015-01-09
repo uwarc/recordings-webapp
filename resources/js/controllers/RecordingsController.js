@@ -68,7 +68,7 @@ angular
          if (talkgroupId <= 0) {
             return 'Unknown'
          } else if (talkgroupId in $scope.talkgroupIds) {
-            return $scope.talkgroupIds[talkgroupId];
+            return $scope.talkgroupIds[talkgroupId] + ' (' + talkgroupId + ')';
          } else {
             return talkgroupId;
          }// End of if/else if/else
@@ -80,7 +80,7 @@ angular
          if (radioId <= 0) {
             return 'Unknown'
          } else if (radioId in $scope.radioIds) {
-            return $scope.radioIds[radioId];
+            return $scope.radioIds[radioId]+ ' (' + radioId + ')';
          } else {
             return radioId;
          }// End of if/else if/else

@@ -82,6 +82,21 @@ class RecordingsSqlite3 implements Recordings
          $talkgroups[$row['id']] = $row['name'];
       }// End of while
 
+      $stmt = $this->db->prepare("SELECT DISTINCT tgid FROM recordings");
+      $res = $stmt->execute();
+
+      if ($res === NULL) return $radios;
+
+      while ($row = $res->fetchArray(SQLITE3_ASSOC))
+      {
+         if ($row['tgid'] === -1 || $row['tgid'] === 0) continue; // radioIds from before support was available
+
+         if (!array_key_exists($row['tgid'], $radios))
+         {
+            $radios[$row['tgid']] = '';
+         }// End of if
+      }// End of while
+
       return $talkgroups;
    }// End of getTalkgroups method
 
@@ -107,6 +122,21 @@ class RecordingsSqlite3 implements Recordings
       while ($row = $res->fetchArray(SQLITE3_ASSOC))
       {
          $radios[$row['id']] = $row['name'];
+      }// End of while
+
+      $stmt = $this->db->prepare("SELECT DISTINCT rid FROM recordings");
+      $res = $stmt->execute();
+
+      if ($res === NULL) return $radios;
+
+      while ($row = $res->fetchArray(SQLITE3_ASSOC))
+      {
+         if ($row['rid'] === -1 || $row['rid'] === 0) continue; // radioIds from before support was available
+
+         if (!array_key_exists($row['rid'], $radios))
+         {
+            $radios[$row['rid']] = '';
+         }// End of if
       }// End of while
 
       return $radios;
@@ -164,14 +194,32 @@ class RecordingsSqlite3 implements Recordings
          $max = PHP_INT_MAX;
       }// End of if
 
-      if (isset($filters['talkgroup']))
+      if (isset($filters['talkgroups']))
       {
-         $sql .= " AND tgid = " . ((int)$filters['talkgroup']) . " ";
+         $talkgroups = explode(',', $filters['talkgroups']);
+         $talkgroups_filter = "";
+
+         foreach ($talkgroups as $talkgroup)
+         {
+            if ($talkgroups_filter !== "") $talkgroups_filter .= " OR ";
+            $talkgroups_filter .= "tgid = " . ((int)$talkgroup);
+         }// End of foreache
+
+         $sql .= " AND ($talkgroups_filter) ";
       }// End of if
 
-      if (isset($filters['radio']))
+      if (isset($filters['radios']))
       {
-         $sql .= " AND rid = " . ((int)$filters['radio']) . " ";
+         $radios = explode(',', $filters['radios']);
+         $radios_filter = "";
+
+         foreach ($radios as $radio)
+         {
+            if ($radios_filter !== "") $radios_filter .= " OR ";
+            $radios_filter .= "rid = " . ((int)$radio);
+         }// End of foreache
+
+         $sql .= " AND ($radios_filter) ";
       }// End of if
 
       $sort = isset($filters['start']) ? "ASC" : "DESC";
