@@ -3,3 +3,4 @@ bower_components/
 config.php
 *.wav
 *.mp3
+.DS_Store
