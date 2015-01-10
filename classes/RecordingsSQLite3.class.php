@@ -103,7 +103,28 @@ class RecordingsSqlite3 implements Recordings
    // Add a new talkgroup
    public function addTalkgroup($talkgroupId, $talkgroupName)
    {
-      $stmt = $this->db->prepare("INSERT INTO talkgroups (id, name) VALUES (:id, :name)");
+      // Check if the talkgroup exists
+      $stmt = $this->db->prepare("SELECT id FROM talkgroups WHERE id = :id");
+      $stmt->bindValue(':id', $talkgroupId);
+      $res = $stmt->execute();
+      $update = false;
+
+      while ($row = $res->fetchArray(SQLITE3_ASSOC))
+      {
+         $update = true;
+         break;
+      }// End of while
+
+      $stmt = null;
+      if ($update)
+      {
+         $stmt = $this->db->prepare("UPDATE talkgroups SET name = :name where id = :id");
+      }// End of if
+      else
+      {
+         $stmt = $this->db->prepare("INSERT INTO talkgroups (id, name) VALUES (:id, :name)");
+      }// End of else
+
       $stmt->bindValue(':id', (int)$talkgroupId);
       $stmt->bindValue(':name', $talkgroupName);
 
@@ -145,7 +166,28 @@ class RecordingsSqlite3 implements Recordings
    // Add a new talkgroup
    public function addRadio($radioId, $radioName)
    {
-      $stmt = $this->db->prepare("INSERT INTO radios (id, name) VALUES (:id, :name)");
+      // Check if the radio exists
+      $stmt = $this->db->prepare("SELECT id FROM radios WHERE id = :id");
+      $stmt->bindValue(':id', $radioId);
+      $res = $stmt->execute();
+      $update = false;
+
+      while ($row = $res->fetchArray(SQLITE3_ASSOC))
+      {
+         $update = true;
+         break;
+      }// End of while
+
+      $stmt = null;
+      if ($update)
+      {
+         $stmt = $this->db->prepare("UPDATE radios SET name = :name where id = :id");
+      }// End of if
+      else
+      {
+         $stmt = $this->db->prepare("INSERT INTO radios (id, name) VALUES (:id, :name)");
+      }// End of else
+
       $stmt->bindValue(':id', (int)$radioId);
       $stmt->bindValue(':name', $radioName);
 
