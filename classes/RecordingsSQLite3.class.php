@@ -292,6 +292,17 @@ class RecordingsSqlite3 implements Recordings
    // Adding new recordings
    public function addRecording($filename)
    {
+      // Check if the recording exists
+      $stmt = $this->db->prepare("SELECT id FROM recordings WHERE filename = :filename");
+      $stmt->bindValue(':filename', $filename);
+      $res = $stmt->execute();
+
+      while ($row = $res->fetchArray(SQLITE3_ASSOC))
+      {
+         return TRUE;
+         break;
+      }// End of while
+
       $str_date = preg_replace('/.*(\d{4})-(\d{2})-(\d{2})-(\d{2}):?(\d{2}):?(\d{2}).*/', '$1-$2-$3 $4:$5:$6', $filename);
       $str_tgid = preg_replace('/.*tg(\d+).*/', '$1', $filename);
       $str_rid = preg_replace('/.*src(\d+).*/', '$1', $filename);
