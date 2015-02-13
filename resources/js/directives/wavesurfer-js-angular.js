@@ -49,8 +49,8 @@ angular
          link: function($scope, $element) {
             // Defaults
             var defaultConfig = {
-               waveColor: '#d4ca3e',
-               progressColor: '#9b9322',
+               waveColor: '#3d7ad0',
+               progressColor: '#245294',
                cursorColor: '#39360d',
                dragSelection: false,
                height: 58,
